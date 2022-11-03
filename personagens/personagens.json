@@ -1,0 +1,38 @@
+{
+    "personagens": [
+        {
+            "indice": 0,
+            "nome": "Lobo",
+            "require": true,
+            "descricao": "Você é o clássico vilão. Não deixem que te descubram. Clique em quem irá assassinar.",
+            "time": "mal",
+            "funcao": "assassino",
+            "status": {
+                "vida": 1,
+                "assassinavel": false,
+                "valor_votos": 1
+            },
+            "acao": {
+                "alvo": false
+            },
+            "efeitos": {},
+            "contador": 1
+        },
+        {
+            "indice": 1,
+            "nome": "Morador",
+            "require": true,
+            "descricao": "Você é do lado bom. Vote para derrotar o mal.",
+            "time": "bem",
+            "funcao": "nada",
+            "status": {
+                "vida": 1,
+                "assassinavel": true,
+                "valor_votos": 1
+            },
+            "acao": {},
+            "efeitos": {},
+            "contador": 1
+        }
+    ]
+}
