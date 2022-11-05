@@ -72,14 +72,13 @@ input[type="radio"] {
 
 label.container {
     height: 4vh;
-    gap: 5px;
 }
 
 label.container:has( input[type="radio"]:checked ){
     background-color: rgb(230, 82, 19);
     height: 4vh;
-    /* border-top-left-radius: 10px;
-    border-bottom-right-radius: 10px; */
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 div {

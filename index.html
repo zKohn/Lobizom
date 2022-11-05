@@ -8,13 +8,12 @@
     <title>Lobizom</title>
 </head>
 <body>
-    <main id="home" class="unlocked">
+    <main id="inicial" class="unlocked">
         <section class="texto">
             Adicione participantes e digite seus nomes
         </section>
         <section class="escolha lado">
             <select>
-                <option value=2>2</option>
                 <option value=3 selected>3</option>
                 <option value=4>4</option>
                 <option value=5>5</option>
@@ -25,6 +24,10 @@
                 <option value=10>10</option>
                 <option value=11>11</option>
                 <option value=12>12</option>
+                <option value=13>13</option>
+                <option value=14>14</option>
+                <option value=15>15</option>
+                <option value=16>16</option>
             </select>
             <button class="add">Add</button>
         </section>
@@ -36,7 +39,7 @@
         <button class="jogar">Jogar</button>
     </main>
 
-    <main id="inicial">
+    <main id="espera">
         <section class="vez"></section>
         <button class="abrir">
             Abrir função
@@ -60,26 +63,24 @@
 
     <main id="votacao">
         <section class="texto">
-            Clique e votar para expulsar um jogador
+            Clique e vote para prender um jogador
         </section>
-        <section class="mortos">CLICA</section>
+        <section class="participantes"></section>
         <button class="votar">Votar</button>
     </main>
 
     <main id="resultado">
         <section class="texto">
-            Clique e votar para expulsar um jogador
+            Os participantes decidiram prender
         </section>
-        <section class="mortos">CLICA</section>
-        <button class="votar">Votar</button>
+        <section class="preso"></section>
+        <button class="novaRodada">ok</button>
     </main>
     
-    <main id=fim">
-        <section class="texto">
-            Clique e votar para expulsar um jogador
-        </section>
-        <section class="mortos">CLICA</section>
-        <button class="votar">Votar</button>
+    <main id="fim">
+        <section class="vencedores"></section>
+        <section class="perdedores"></section>
+        <button class="voltar">Continuar</button>
     </main>
 
     <script type="module" src="script/index.js"></script>

@@ -1,16 +1,17 @@
 {
     "personagens": [
         {
-            "indice": 0,
             "nome": "Lobo",
             "require": true,
             "descricao": "Você é o clássico vilão. Não deixem que te descubram. Clique em quem irá assassinar.",
             "time": "mal",
             "funcao": "assassino",
+            "vitoria": "time",
             "status": {
                 "vida": 1,
                 "assassinavel": false,
-                "valor_votos": 1
+                "valor_votos": 1,
+                "preso": false
             },
             "acao": {
                 "alvo": false
@@ -19,16 +20,32 @@
             "contador": 1
         },
         {
-            "indice": 1,
             "nome": "Morador",
             "require": true,
-            "descricao": "Você é do lado bom. Vote para derrotar o mal.",
+            "descricao": "Você é do lado bom. Aguarde para votar e derrotar o mal.",
             "time": "bem",
             "funcao": "nada",
             "status": {
                 "vida": 1,
                 "assassinavel": true,
-                "valor_votos": 1
+                "valor_votos": 1,
+                "preso": false
+            },
+            "acao": {},
+            "efeitos": {},
+            "contador": 1
+        },
+        {
+            "nome": "Bobo",
+            "require": true,
+            "descricao": "Você não percente a um lado. Seu personagem é bobo e sua condição de vitória é ser preso.",
+            "time": "solo",
+            "funcao": "nada",
+            "status": {
+                "vida": 1,
+                "assassinavel": true,
+                "valor_votos": 1,
+                "preso": false
             },
             "acao": {},
             "efeitos": {},
