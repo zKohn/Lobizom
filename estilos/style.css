@@ -28,8 +28,9 @@ main {
     border: 2px solid black;
     padding: 15px;
     border-radius: 9px;
-    max-width: 78vw;
-    height: 55vh;
+    width: 78vw;
+    max-width: 350px;
+    height: 60vh;
 }
 
 section {
