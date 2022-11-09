@@ -155,9 +155,9 @@ export const funcao = {
     },
     'protetor': {
         'botoes': (participantes) => {
-            const protegiveis = participantes.array.filter(part,i => participantes.ok[i]!==false)
+            const protegiveis = participantes.array.filter(part => participantes.ok.includes(part.nome))
             let matrizBotoes = FunctionReference.geraMatrizBotoes({
-                'arrayReferidos': participantes.array,
+                'arrayReferidos': protegiveis,
                 'referencia': 'protecao'
             });
             return FunctionReference.botoesHTML(matrizBotoes);
