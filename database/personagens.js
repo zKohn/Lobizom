@@ -24,7 +24,7 @@ export class Personagem{
                 "nome": "Morador",
                 "descricao": "Você é do lado bom. Às vezes recebe mensagens dos vizinhos. Aguarde para votar e derrotar o mal.",
                 "time": "bem",
-                "funcao": "nada",
+                "funcao": "morador",
                 "vitoria": "time",
                 "status": {
                     "vida": 1,
@@ -67,68 +67,4 @@ export class Personagem{
             }
         }
     }
-}
-
-export const objPersonagens2 = {
-    "personagens": [
-        {
-            "nome": "Lobo",
-            "descricao": "Você é o clássico vilão. Não deixem que te descubram. Clique em quem irá assassinar.",
-            "time": "mal",
-            "funcao": "assassino",
-            "vitoria": "time",
-            "status": {
-                "vida": 1,
-                "assassinavel": false,
-                "valor_votos": 1,
-                "preso": false
-            },
-            "acao": {
-                "alvo": false
-            },
-            "efeitos": []
-        },
-        {
-            "nome": "Morador",
-            "descricao": "Você é do lado bom. Às vezes recebe mensagens dos vizinhos. Aguarde para votar e derrotar o mal.",
-            "time": "bem",
-            "funcao": "nada",
-            "status": {
-                "vida": 1,
-                "assassinavel": true,
-                "valor_votos": 1,
-                "preso": false
-            },
-            "acao": {},
-            "efeitos": []
-        },
-        {
-            "nome": "Anjo da Guarda",
-            "descricao": "Você é do lado bom. Clique para acompanhar uma pessoa e protegê-la de assassinos.",
-            "time": "bem",
-            "funcao": "protetor",
-            "status": {
-                "vida": 1,
-                "assassinavel": true,
-                "valor_votos": 1,
-                "preso": false
-            },
-            "acao": {},
-            "efeitos": []
-        },
-        {
-            "nome": "Bobo",
-            "descricao": "Você não pertence a um lado. Seu personagem é bobo e sua condição de vitória é ser preso.",
-            "time": "solo",
-            "funcao": "nada",
-            "status": {
-                "vida": 1,
-                "assassinavel": true,
-                "valor_votos": 1,
-                "preso": false
-            },
-            "acao": {},
-            "efeitos": []
-        }
-    ]
 }

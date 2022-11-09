@@ -8,6 +8,16 @@
     <title>Lobizom</title>
 </head>
 <body>
+    <header>
+        <button class="blackMode">Black Mode</button>
+    </header>
+
+    <main id="menu">
+        <section class="logo">LOBIZOM</section>
+        <button class="jogar">Jogar</button>
+        <button class="tutorial">Tutorial</button>
+    </main>
+
     <main id="inicial" class="unlocked">
         <section class="texto">
             Adicione participantes e digite seus nomes
@@ -28,6 +38,8 @@
                 <option value=14>14</option>
                 <option value=15>15</option>
                 <option value=16>16</option>
+                <option value=17>17</option>
+                <option value=18>18</option>
             </select>
             <button class="add">Add</button>
         </section>
@@ -79,11 +91,15 @@
     </main>
     
     <main id="fim">
+        <section class="texto">FIM DE JOGO!!</section>
         <section class="vencedores"></section>
-        <section class="perdedores"></section>
-        <button class="voltar">Voltar</button>
+        <section class="lado">
+            <button class="menu">Menu</button>
+            <button class="restart">Restart</button>
+        </section>
     </main>
 
     <script type="module" src="script/index.js"></script>
+    <script type="text/javascript" src="script/estilos.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 import objtimes from '../database/times.json' assert {'type': 'json'}
 import { Personagem } from '../database/personagens.js'
-import { funcao, auxiliarVotar } from './funcoes.js';
+import { funcao, auxiliarVotar, auxiliarVitoria } from './funcoes.js';
 
 // Seletores para interação com HTML
 const inicial = document.querySelector('main#inicial');
@@ -9,6 +9,7 @@ const classe = document.querySelector('main#classe');
 const resumo =  document.querySelector('main#resumo');
 const votacao =  document.querySelector('main#votacao');
 const prisao =  document.querySelector('main#prisao');
+const fim =  document.querySelector('main#fim');
 const botaoAddParticipantes = inicial.querySelector('button.add');
 const botaoJogar = inicial.querySelector('button.jogar');
 const botaoAbrirFuncao = espera.querySelector('button.abrir');
@@ -16,6 +17,8 @@ const botaoProximoJogador = classe.querySelector('button.proximo');
 const botaoAbrirVotacao = resumo.querySelector('button.votacao');
 const botaoVotar = votacao.querySelector('button.votar');
 const botaoNovaRodada = prisao.querySelector('button.novaRodada');
+const botaoVoltarMenu = fim.querySelector('button.menu');
+const botaoRestart = fim.querySelector('button.restart');
 
 // Ambiente de jogo
 const personagem = new Personagem();
@@ -57,10 +60,6 @@ const calculaProximaVez = () => {
             return false;
         }
     }while(  participantes.ok[vez-1]===false );
-    console.log('Função calculaProximaVez, vez:');
-    console.log(vez);
-    console.log('Variavel participantes');
-    console.log(participantes);
     return true;
 }
 const textoProximoJogadorHTML = () => {
@@ -75,7 +74,6 @@ const acaoJogadorPassado = () => {
 }
 const finalizaAcoes = () => {
     let novosParticipantes = participantes;
-    debugger
     for(let i=0; i<participantes.array.length; i++){
         novosParticipantes = funcao[ novosParticipantes.array[i].personagem.funcao ]['finaliza_acao'](
             novosParticipantes,
@@ -93,19 +91,19 @@ const resetarEfeitos = () => {
 // Funções de utilidade intermediária
 const geraPersonagensPorTimes = () => {
     let qtdPorTime = 0, listaNomesPersonagens = [], qtdTotal = 0;
-    console.log(participantes)
     for(let i=0; i<times.length; i++){
         qtdPorTime = times[i]['min'] + Math.floor( times[i]['ideal']*numero );
         qtdTotal+=qtdPorTime;
         if(qtdTotal > numero)
             qtdPorTime -= (qtdTotal - numero);
         for(let j=1; j<=qtdPorTime; j++){
-            listaNomesPersonagens.push( times[i].personagens[ Math.floor( Math.random()*(times[i].personagens).length ) ] );
+            listaNomesPersonagens.push( times[i].personagens[ Math.floor( Math.random()*times[i].personagens.length ) ] );
         }
         if(qtdTotal>=numero) break;
     }
-    console.log('listaNomesPersonagens');
-    console.log(listaNomesPersonagens);
+    while(qtdTotal<numero){
+        listaNomesPersonagens.push("Morador");
+    }
     return embaralha(listaNomesPersonagens);
 }
 const geraPersonagens = () => {
@@ -146,10 +144,8 @@ const carregaPersonagem = () => {
 }
 const calculaAssassinados = () => {
     let novosAssassinados = [];
-    console.log('\nCALCULANDO ASSASSINADOS DA RODADA');
     for(let i=0; i<participantes.array.length; i++){
         if(participantes.array[i].personagem.status.vida <= 0 && !(participantes.ok[i]===false)){
-            console.log('Novo assassinado: '+participantes.array[i].nome);
             novosAssassinados.push({
                 'nome': participantes.array[i].nome,
                 'personagemNome': participantes.array[i].personagem.nome
@@ -189,8 +185,6 @@ const calculaPreso = () => {
         if( !(arrayVotos[i]===false) )
             contagem[arrayVotos[i]]++;
     }
-    console.log('Contagem de votos');
-    console.log(contagem)
     for(i=0; i<contagem.length; i++){
         if(contagem[i] > votosPreso){
             votosPreso = contagem[i];
@@ -199,9 +193,6 @@ const calculaPreso = () => {
             resultado = 'empate';
         }
     }
-    console.log('Sobre os votos, em indices:')
-    console.log(arrayVotos);
-    console.log(resultado);
     prendePersonagem(resultado);
     return resultado;
 }
@@ -249,12 +240,12 @@ botaoProximoJogador.addEventListener('click', () => {
     mudaTela({'de': classe, 'para': espera});
 });
 botaoAbrirFuncao.addEventListener('click', () => {
-    console.log('Participantes, vez = '+vez);
-    console.log(participantes);
     carregaPersonagem();
     mudaTela({'de': espera, 'para': classe});
 });
 botaoAbrirVotacao.addEventListener('click', () => {
+    if(calculaVencedores(resumo))
+        return;
     arrayVotos = [];
     calculaProximaVez();
     carregaVotacao();
@@ -270,10 +261,20 @@ botaoVotar.addEventListener('click', () => {
     mudaTela({'de': votacao, 'para': votacao});
 });
 botaoNovaRodada.addEventListener('click', () => {
+    if(calculaVencedores(prisao))
+        return;
     resetarEfeitos();
     calculaProximaVez();
     textoProximoJogadorHTML();
     mudaTela({'de': prisao, 'para': espera});
+});
+botaoRestart.addEventListener('click', () => {
+    restartJogo();
+    textoProximoJogadorHTML();
+    mudaTela({'de': fim, 'para': espera});
+});
+botaoVoltarMenu.addEventListener('click', () => {
+    mudaTela({'de': fim, 'para': inicial});
 });
 
 // Funções avançadas
@@ -285,4 +286,27 @@ const resumoDia = () => {
 const resultadoVotacao = () => {
     carregaPrisao();
     mudaTela({'de': votacao, 'para': prisao});
+}
+const restartJogo = () => {
+    vez = 1;
+    let listaNomesPersonagens = geraPersonagensPorTimes();
+    for(let i=0; i<participantes.array.length; i++){
+        participantes.array[i].personagem = personagem.gera(listaNomesPersonagens[i]);
+        participantes.ok[i] = participantes.array[i].nome;
+    }
+}
+const calculaVencedores = (telaAnterior) => {
+    let ganhadores = auxiliarVitoria.testar(participantes);
+    if(ganhadores===false)
+        return false;
+    resultadoJogo(ganhadores, telaAnterior);
+    return true;
+}
+const resultadoJogo = (ganhadores, telaAnterior) => {
+    let secaoVencedores = fim.querySelector('section.vencedores');
+    secaoVencedores.innerHTML = "VENCEDORES:";
+    ganhadores.forEach(g => {
+        secaoVencedores.innerHTML += `<div class="lado">${g.nome} - <strong>${g.personagem.nome}</strong></div>`;
+    });
+    mudaTela({ 'de': telaAnterior, 'para': fim});
 }

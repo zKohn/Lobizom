@@ -22,7 +22,6 @@ let FunctionReference = {
     },
     'getClicado': (referencia) => {
         let checked = document.querySelector(`label.${referencia} input:checked`);
-        console.log(checked);
         if(!checked) return false;
         return checked.className;
     }
@@ -45,10 +44,39 @@ export const auxiliarVotar = {
                 break;
             }
         }
-        console.log('votado, em funçoes. Olhar o nome:');
-        console.log(voto);
         return voto;
     }
+}
+
+export const auxiliarVitoria = {
+    'time': (participantes) => {
+        const timeBem = participantes.array.filter((part,i) => part.personagem.time=='bem'&&participantes.ok[i]!==false);
+        const timeMal = participantes.array.filter((part,i) => part.personagem.time=='mal'&&participantes.ok[i]!==false);
+        if(timeMal.length==0&&timeBem.length>0)
+            return timeBem;
+        if(timeMal.length>0&&timeMal.length>timeBem.length)
+            return timeMal;
+        return false;
+    },
+    'preso': (participantes) => {
+        const ganhadores = participantes.array.filter(part => part.personagem.vitoria=='preso'&&part.personagem.status.preso);
+        if(ganhadores.length!=0)
+            return ganhadores;
+        return false;
+    },
+    'unico': (participantes) => {
+        const ganhador = participantes.array.filter(part => part.personagem.vitoria=='unico'||part!==false);
+        if(ganhador.length!=1 || ganhador.personagem.vitoria!='unico')
+            return false;
+        return ganhador;
+    },
+    'testar': (participantes) => {
+        return auxiliarVitoria.preso(participantes) ||
+            auxiliarVitoria.unico(participantes) ||
+            auxiliarVitoria.time(participantes) ||
+            false;
+    }
+
 }
 
 export const funcao = {
@@ -73,7 +101,6 @@ export const funcao = {
             for(let i=0; i<participantes.array.length; i++){
                 if(participantes.array[i].nome==participantes.array[indicePart].personagem.acao.alvo){
                     indiceAlvo = i;
-                    console.log('Alvo = '+indiceAlvo)
                     break;
                 }
             }
@@ -104,17 +131,17 @@ export const funcao = {
             let mensagem = '<div><strong>MENSAGEM</strong>: ';
             switch(participantes.array[indiceAssunto].personagem.funcao){
                 case "morador":
-                    mensagem+=`Os vizinhos mais antigos dizem que <strong>${participantes.array[indiceAssunto].nome}</strong> sempre foi bom morador`
+                    mensagem+=`<div class="lado">Os vizinhos mais antigos dizem que <strong>${participantes.array[indiceAssunto].nome}</strong> sempre foi bom morador.</div>`
                     break;
                 default:
                     if(participantes.array[indiceAssunto].personagem.status.preso){
                         if(participantes.array[indiceAssunto].personagem.time=="bem")
-                            mensagem+=`Há boatos de que <strong>${participantes.array[indiceAssunto].nome}</strong> foi preso injustamente`;
+                            mensagem+=`<div class="lado">Há boatos de que <strong>${participantes.array[indiceAssunto].nome}</strong> foi preso injustamente.</div>`;
                         else
-                            mensagem+=`Alguns vizinhos estavam incomodados com <strong>${participantes.array[indiceAssunto].nome}</strong>. Dizem que ele não era do bem.`
+                            mensagem+=`<div class="lado">Alguns vizinhos estavam incomodados com <strong>${participantes.array[indiceAssunto].nome}</strong>. Dizem que ele não era do bem.</div>`
                         break;
                     }
-                    mensagem+=`Você viu <strong>${participantes.array[indiceAssunto].nome}</strong> agindo de maneira suspeita. Ele pode ser bom, mas não é um morador.`;
+                    mensagem+=`<div class="lado">Você viu <strong>${participantes.array[indiceAssunto].nome}</strong> agindo de maneira suspeita. Ele pode ser bom, mas não é um morador.</div>`;
 
             }
             return mensagem;
@@ -128,6 +155,7 @@ export const funcao = {
     },
     'protetor': {
         'botoes': (participantes) => {
+            const protegiveis = participantes.array.filter(part,i => participantes.ok[i]!==false)
             let matrizBotoes = FunctionReference.geraMatrizBotoes({
                 'arrayReferidos': participantes.array,
                 'referencia': 'protecao'
@@ -137,18 +165,14 @@ export const funcao = {
         'acao': (participantes, indicePart) => {
             let protegido = FunctionReference.getClicado('protecao');
             let indiceProtegido;
-            console.log('Acao dos protetores:'+protegido);
             if(protegido===false) 
                 return participantes;
             for(let i=0; i<participantes.array.length; i++){
                 if(participantes.array[i].nome==protegido){
                     indiceProtegido = i;
-                    console.log(indiceProtegido);
                     break;
                 }
             }
-            console.log('Protegido por ' + participantes.array[indicePart].nome);
-            console.log(participantes.array[indiceProtegido].nome);
             participantes.array[indiceProtegido].personagem.efeitos.push('protecao');
             return participantes;
         },
