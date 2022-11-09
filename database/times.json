@@ -1,0 +1,28 @@
+{
+    "times": [
+        {
+            "time": "mal",
+            "min": 1,
+            "ideal": 0.18,
+            "personagens": [
+                "Lobo"
+            ]
+        },
+        {
+            "time": "bem",
+            "min": 1,
+            "ideal": 0.5,
+            "personagens": [
+                "Morador", "Anjo da Guarda"
+            ]
+        },
+        {
+            "time": "solo",
+            "min": 0,
+            "ideal": 0.3,
+            "personagens": [
+                "Bobo"
+            ]
+        }
+    ]
+}

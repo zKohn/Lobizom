@@ -8,13 +8,22 @@
     <title>Lobizom</title>
 </head>
 <body>
-    <main id="home" class="unlocked">
+    <header>
+        <button class="blackMode">Black Mode</button>
+    </header>
+
+    <main id="menu">
+        <section class="logo">LOBIZOM</section>
+        <button class="jogar">Jogar</button>
+        <button class="tutorial">Tutorial</button>
+    </main>
+
+    <main id="inicial" class="unlocked">
         <section class="texto">
             Adicione participantes e digite seus nomes
         </section>
         <section class="escolha lado">
             <select>
-                <option value=2>2</option>
                 <option value=3 selected>3</option>
                 <option value=4>4</option>
                 <option value=5>5</option>
@@ -25,6 +34,12 @@
                 <option value=10>10</option>
                 <option value=11>11</option>
                 <option value=12>12</option>
+                <option value=13>13</option>
+                <option value=14>14</option>
+                <option value=15>15</option>
+                <option value=16>16</option>
+                <option value=17>17</option>
+                <option value=18>18</option>
             </select>
             <button class="add">Add</button>
         </section>
@@ -36,7 +51,7 @@
         <button class="jogar">Jogar</button>
     </main>
 
-    <main id="inicial">
+    <main id="espera">
         <section class="vez"></section>
         <button class="abrir">
             Abrir função
@@ -54,34 +69,37 @@
         <section class="texto">
             Foram assassinados
         </section>
-        <section class="mortos">NOMES</section>
+        <section class="assassinados">NOMES</section>
         <button class="votacao">Votação</button>
     </main>
 
     <main id="votacao">
+        <section class="vez"></section>
         <section class="texto">
-            Clique e votar para expulsar um jogador
+            Clique e vote para prender um jogador
         </section>
-        <section class="mortos">CLICA</section>
+        <section class="participantes"></section>
         <button class="votar">Votar</button>
     </main>
 
-    <main id="resultado">
+    <main id="prisao">
         <section class="texto">
-            Clique e votar para expulsar um jogador
+            Os participantes decidiram prender
         </section>
-        <section class="mortos">CLICA</section>
-        <button class="votar">Votar</button>
+        <section class="preso"></section>
+        <button class="novaRodada">ok</button>
     </main>
     
-    <main id=fim">
-        <section class="texto">
-            Clique e votar para expulsar um jogador
+    <main id="fim">
+        <section class="texto">FIM DE JOGO!!</section>
+        <section class="vencedores"></section>
+        <section class="lado">
+            <button class="menu">Menu</button>
+            <button class="restart">Restart</button>
         </section>
-        <section class="mortos">CLICA</section>
-        <button class="votar">Votar</button>
     </main>
 
     <script type="module" src="script/index.js"></script>
+    <script type="text/javascript" src="script/estilos.js"></script>
 </body>
 </html>
