@@ -20,6 +20,7 @@ body {
     width: 98vw;
     height: 98vh;
     border-color: black;
+    /* background-image: url('../img/1fundo_roxo.jfif'); */
 }
 
 header {
@@ -43,6 +44,7 @@ main {
     width: 78vw;
     max-width: 350px;
     height: 60vh;
+    /* background-color: rgb(0,0,0,0.45); */
 }
 
 section {

@@ -1,6 +1,4 @@
 export class Personagem{
-    constructor(){
-    }
     gera(personagemNome){
         switch(personagemNome){
             case 'Lobo': return {

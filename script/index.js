@@ -1,6 +1,6 @@
 import objtimes from '../database/times.json' assert {'type': 'json'}
 import { Personagem } from '../database/personagens.js'
-import { funcao, auxiliarVotar, auxiliarVitoria } from './funcoes.js';
+import { funcao, modosDeJogo, auxiliarVotar, auxiliarVitoria } from './funcoes.js';
 
 // Seletores para interação com HTML
 const inicial = document.querySelector('main#inicial');
@@ -23,6 +23,8 @@ const botaoRestart = fim.querySelector('button.restart');
 // Ambiente de jogo
 const personagem = new Personagem();
 const times = objtimes.times;
+const modo = modosDeJogo;
+let modoJogo = "Normal";
 let numero = 3;
 let vez = 0;
 let participantes = {
@@ -59,7 +61,7 @@ const calculaProximaVez = () => {
             vez = 0;
             return false;
         }
-    }while(  participantes.ok[vez-1]===false );
+    }while( participantes.ok[vez-1]===false );
     return true;
 }
 const textoProximoJogadorHTML = () => {
@@ -134,10 +136,10 @@ const carregaPersonagem = () => {
                 secao.innerHTML = `${participantes.array[vez-1].nome} é <strong>${pers.nome}</strong>`;
                 break;
             case 'descricao':
-                secao.innerHTML = `${pers.descricao}`;
+                secao.innerHTML = !pers.status.preso ? pers.descricao : `Você está preso. Tente acertar a senha de 3 dígitos para sair da prisão.`;
                 break;
             case 'botoes':
-                secao.innerHTML = funcao[pers.funcao]['botoes'](participantes) || '';
+                secao.innerHTML = funcao[!pers.status.preso ? pers.funcao : 'personagem_preso']['botoes'](participantes) || '';
                 break;
         }
     })
@@ -164,7 +166,7 @@ const mostraAssassinados = () => {
     }
     secaoAssassinados.innerHTML = '';
     novosAssassinados.forEach(a => {
-        secaoAssassinados.innerHTML += `${a.nome} - <strong>${a.personagemNome}</strong>`;
+        secaoAssassinados.innerHTML += `<div class="lado">${a.nome} - <strong>${a.personagemNome}</strong></div>`;
     });
 }
 const carregaVotacao = () => {

@@ -27,6 +27,24 @@ let FunctionReference = {
     }
 }
 
+export const modosDeJogo = {
+    "Normal": {
+        "preso_joga": true,
+        "assassinado_joga": false,
+        "multiplicador_vida": 1,
+    },
+    "Completo": {
+        "preso_joga": true,
+        "assassinado_joga": false,
+        "multiplicador_vida": 2,
+    },
+    "Sobreviventes": {
+        "preso_joga": false,
+        "assassinado_joga": false,
+        "multiplicador_vida": 1,
+    }
+}
+
 export const auxiliarVotar = {
     'botoes': (votaveis) => {
         let matrizBotoes = FunctionReference.geraMatrizBotoes({
@@ -80,6 +98,37 @@ export const auxiliarVitoria = {
 }
 
 export const funcao = {
+    'personagem_preso': {
+        'botoes': () => {
+            return `
+            <div class="lado">
+                <select class="personagem_preso">
+                    <option value=0 selected>0</option>
+                    <option value=1>1</option>
+                </select>
+                <select class="personagem_preso">
+                    <option value=0 selected>0</option>
+                    <option value=1>1</option>
+                </select>
+                <select class="personagem_preso">
+                    <option value=0 selected>0</option>
+                    <option value=1>1</option>
+                </select>
+            </div>`;
+        },
+        'acao': (participantes, indicePart) => {
+            const senha = [Math.floor(Math.random()*2), Math.floor(Math.random()*2), Math.floor(Math.random()*2)];
+            const selectsHTML = document.querySelectorAll('select.personagem_preso');
+            let tentativa = [];
+            for(let i=0; i<selectsHTML.length; i++){
+                tentativa.push( s.options[s.selectedIndex].value );
+                if(tentativa[i]!=senha[i])
+                    return participantes;
+            }
+            participantes.array[indicePart].status.preso = false;
+            return participantes;
+        }
+    },
     'assassino': {
         'botoes': (participantes) => {
             let assassinaveis = participantes['array'].filter(
@@ -104,6 +153,7 @@ export const funcao = {
                     break;
                 }
             }
+            participantes.array[indicePart].acao.alvo = false;
             if(indiceAlvo===false)
                 return participantes;
             if( !(participantes.array[indiceAlvo].personagem.efeitos.includes('protecao')) ) 
@@ -124,8 +174,8 @@ export const funcao = {
     },
     'morador': {
         'botoes': (participantes) => {
-            const chanceDeMensagem = 3;
-            if( Math.floor(Math.random()*chanceDeMensagem) != 0 || participantes.array.length<6)
+            const chanceDeMensagem = participantes.array.length-2;
+            if( Math.floor(Math.random()*chanceDeMensagem)!=0 || participantes.array.length<6 )
                 return false;
             const indiceAssunto = Math.floor(Math.random()*participantes.array.length); 
             let mensagem = '<div><strong>MENSAGEM</strong>: ';
@@ -141,8 +191,7 @@ export const funcao = {
                             mensagem+=`<div class="lado">Alguns vizinhos estavam incomodados com <strong>${participantes.array[indiceAssunto].nome}</strong>. Dizem que ele não era do bem.</div>`
                         break;
                     }
-                    mensagem+=`<div class="lado">Você viu <strong>${participantes.array[indiceAssunto].nome}</strong> agindo de maneira suspeita. Ele pode ser bom, mas não é um morador.</div>`;
-
+                    mensagem+=`<div class="lado">Você viu <strong>${participantes.array[indiceAssunto].nome}</strong> agindo estranho. Percebeu que ele não é um morador.</div>`;
             }
             return mensagem;
         },
