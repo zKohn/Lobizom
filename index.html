@@ -9,23 +9,28 @@
 </head>
 <body>
     <header>
-        <button class="blackMode">Black Mode</button>
+        <button class="fundo">Mudar Fundo</button>
+        <button class="pause">🔇</button>
     </header>
 
-    <main id="menu">
+    <main id="menu" class="unlocked">
         <section class="logo">LOBIZOM</section>
-        <button class="jogar">Jogar</button>
-        <button class="tutorial">Tutorial</button>
+        <section class="titulo">Escolha o modo de jogo</section>
+        <section class="modos"></section>
+        <section class="lado">
+            <button class="voltar"><a href="home.html">Voltar</a></button>
+            <button class="configurar">Selecionar</button>
+        </section>
     </main>
 
-    <main id="inicial" class="unlocked">
+    <main id="configuracoes">
+        <section class="modo lado"></section>
         <section class="texto">
             Adicione participantes e digite seus nomes
         </section>
         <section class="escolha lado">
             <select>
-                <option value=3 selected>3</option>
-                <option value=4>4</option>
+                <option value=4 selected>4</option>
                 <option value=5>5</option>
                 <option value=6>6</option>
                 <option value=7>7</option>
@@ -44,11 +49,15 @@
             <button class="add">Add</button>
         </section>
         <section class="participantes lado">
-            <input class="nome">
-            <input class="nome">
-            <input class="nome">
+            <input type="text" class="nome">
+            <input type="text" class="nome">
+            <input type="text" class="nome">
+            <input type="text" class="nome">
         </section>
-        <button class="jogar">Jogar</button>
+        <section class="lado">
+            <button class="jogar">Jogar</button>
+            <button class="jogar"><a href="index.html">Voltar</a></button>
+        </section>
     </main>
 
     <main id="espera">
@@ -61,7 +70,7 @@
     <main id="classe">
         <section class="personagem">NOME</section>
         <section class="descricao">Descricao</section>
-        <section class="botoes">CLICA</section>
+        <section class="interacoes">CLICA</section>
         <button class="proximo">Passar a vez</button>
     </main>
 
@@ -70,6 +79,16 @@
             Foram assassinados
         </section>
         <section class="assassinados">NOMES</section>
+        <button class="votacao">Votação</button>
+    </main>
+
+    <main id="surpresas">
+        <section class="texto">
+            Ainda nesta rodada
+        </section>
+        <section class="fugitivos"></section>
+        <section class="renascidos"></section>
+        <section class="tarefa"></section>
         <button class="votacao">Votação</button>
     </main>
 
@@ -91,15 +110,19 @@
     </main>
     
     <main id="fim">
-        <section class="texto">FIM DE JOGO!!</section>
+        <section class="logo">LOBIZOM</section>
+        <section class="texto">FIM DE JOGO!!!</section>
         <section class="vencedores"></section>
         <section class="lado">
-            <button class="menu">Menu</button>
             <button class="restart">Restart</button>
+            <button class="menu"><a href="home.html">Menu Principal</a></button>
         </section>
     </main>
 
+    <audio src="./media/Mystery.3gpp" loop class="principal">true</audio>
+
+    <script src="script/sons.js"></script>
     <script type="module" src="script/index.js"></script>
-    <script type="text/javascript" src="script/estilos.js"></script>
+    <script src="script/estilos.js"></script>
 </body>
 </html>

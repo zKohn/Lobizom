@@ -1,11 +1,14 @@
 {
-    "times": [
+    "comum": [
         {
             "time": "mal",
             "min": 1,
             "ideal": 0.18,
             "personagens": [
                 "Lobo"
+            ],
+            "proporcao": [
+                0
             ]
         },
         {
@@ -14,6 +17,9 @@
             "ideal": 0.5,
             "personagens": [
                 "Morador", "Anjo da Guarda"
+            ],
+            "proporcao": [
+                0, 0, 0, 1
             ]
         },
         {
@@ -22,6 +28,68 @@
             "ideal": 0.3,
             "personagens": [
                 "Bobo"
+            ],
+            "proporcao": [
+                0
+            ]
+        }
+    ],
+    "sobrevivencia": [
+        {
+            "time": "mal",
+            "min": 1,
+            "ideal": 0.18,
+            "personagens": [
+                "Lobo"
+            ],
+            "proporcao": [
+                0
+            ]
+        },
+        {
+            "time": "bem",
+            "min": 1,
+            "ideal": 0.5,
+            "personagens": [
+                "Morador"
+            ],
+            "proporcao": [
+                0
+            ]
+        },
+        {
+            "time": "solo",
+            "min": 0,
+            "ideal": 0.3,
+            "personagens": [
+                "Bobo"
+            ],
+            "proporcao": [
+                0
+            ]
+        }
+    ],
+    "amongus": [
+        {
+            "time": "mal",
+            "min": 1,
+            "ideal": 0.18,
+            "personagens": [
+                "Impostor"
+            ],
+            "proporcao": [
+                0
+            ]
+        },
+        {
+            "time": "bem",
+            "min": 2,
+            "ideal": 0.5,
+            "personagens": [
+                "Inocente"
+            ],
+            "proporcao": [
+                0
             ]
         }
     ]

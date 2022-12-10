@@ -1,0 +1,32 @@
+{
+    "modos": [
+        {
+            "nome": "Normal",
+            "objTimes": "comum",
+            "preso_joga": true,
+            "assassinado_joga": false,
+            "multiplicador_vida": 1
+        },
+        {
+            "nome": "Vida Fácil",
+            "objTimes": "comum",
+            "preso_joga": true,
+            "assassinado_joga": true,
+            "multiplicador_vida": 1
+        },
+        {
+            "nome": "Sobrevivência",
+            "objTimes": "sobrevivencia",
+            "preso_joga": false,
+            "assassinado_joga": false,
+            "multiplicador_vida": 1
+        },
+        {
+            "nome": "Amongus",
+            "objTimes": "amongus",
+            "preso_joga": false,
+            "assassinado_joga": false,
+            "multiplicador_vida": 1
+        }
+    ]
+}
