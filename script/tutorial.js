@@ -1,6 +1,6 @@
-import objtimes from '../database/times.json' assert {'type': 'json'}
-import objModosDeJogo from '../database/modos.json' assert {'type': 'json'}
-import { Personagem } from '../database/personagens.js'
+import objtimes from '../local_database/times.json' assert {'type': 'json'}
+import objModosDeJogo from '../local_database/modos.json' assert {'type': 'json'}
+import { Personagem } from '../local_database/personagens.js'
 import { FunctionReference } from './funcoes.js';
 
 const body = document.querySelector('body');
