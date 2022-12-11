@@ -116,8 +116,9 @@ export const funcao = {
             </div>`;
         },
         'acao': (participantes, indicePart) => {
-            // const senha = [Math.floor(Math.random()*2), Math.floor(Math.random()*2)];
-            let senha = [0,0];
+            let senha = [Math.floor(Math.random()*2), Math.floor(Math.random()*2)];
+            console.log('senha sorteada: ');
+            console.log(senha);
             const selectsHTML = document.querySelectorAll('select.password');
             let tentativa = [];
             for(let i=0; i<selectsHTML.length; i++){
