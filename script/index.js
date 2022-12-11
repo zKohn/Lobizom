@@ -317,6 +317,11 @@ const resultadoJogo = (ganhadores, telaAnterior) => {
     });
     mudaTela({ 'de': telaAnterior, 'para': fim});
 }
+const calculaVotacao = () => {
+    arrayVotos = [];
+    calculaProximaVez(true);
+    carregaVotacao();
+}
 
 // Funções de interligação
 botaoAbrirConfigs.addEventListener('click', () => {
@@ -361,12 +366,11 @@ botaoAbrirVotacao.addEventListener('click', () => {
         return;
     if(calculaVencedores(resumo))
         return;
-    arrayVotos = [];
-    calculaProximaVez(true);
-    carregaVotacao();
+    calculaVotacao();
     mudaTela({'de': resumo, 'para': votacao});
 });
 botaoAbrirVotacao2.addEventListener('click', () => {
+    calculaVotacao();
     mudaTela({'de': surpresas, 'para': votacao});
 });
 botaoVotar.addEventListener('click', () => {

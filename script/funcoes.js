@@ -37,8 +37,8 @@ export const auxiliarPersonagem = {
         if(participantes.ok[vez-1])
             return participantes.array[vez-1].personagem.descricao  || '';
         if(participantes.array[vez-1].personagem.status.preso)
-            return `Você está preso. Tente acertar a senha de 3 dígitos da cela para sair da prisão.`;
-        return `Seu personagem foi assassinado. Tente acertar os 3 dígitos do código da vida para renascer.`;
+            return `Você está preso. Tente acertar a senha da cela para sair da prisão.`;
+        return `Seu personagem foi assassinado. Tente acertar o código da vida para renascer.`;
     },
     'interacoes': (participantes, vez) => {
         if(participantes.ok[vez-1])
