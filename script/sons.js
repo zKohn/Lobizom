@@ -3,6 +3,7 @@ const botaoPauseHTML = document.querySelector('button.pause');
 
 const playAudioTransicao = () => {
     const audio = new Audio('../media/Mecanico.3gpp');
+    audio.load();
     audio.volume *= 0.3;
     audio.currentTime = 0.28;
     audio.play();
@@ -10,6 +11,7 @@ const playAudioTransicao = () => {
 
 const playAudioBolha = () => {
     const audio = new Audio('../media/bolha.mp3');
+    audio.load();
     audio.currentTime = 0.18;
     audio.play();
 }
