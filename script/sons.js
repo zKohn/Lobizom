@@ -3,7 +3,7 @@ const botaoPauseHTML = document.querySelector('button.pause');
 
 const playAudioTransicao = () => {
     // const audio = new Audio('../media/mecanico.mp3');
-    const audio = new Audio('Lobizom/media/mecanico.mp3');
+    const audio = new Audio('./media/mecanico.mp3');
     audio.volume *= 0.3;
     audio.currentTime = 0.28;
     audio.play();
