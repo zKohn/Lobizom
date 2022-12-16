@@ -2,10 +2,12 @@ const body = document.querySelector('body');
 const header = document.querySelector('header');
 const botaoBlackMode = header.querySelector('button.fundo');
 const totalFundos = 8;
-let indice = 1;
+let indice = 0;
 
 function selecionaFundo(){
     switch(indice){
+        case 0:
+            break;
         case 1: 
             body.classList.add('blackMode');
             break;
